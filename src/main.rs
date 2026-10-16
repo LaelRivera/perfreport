@@ -61,7 +61,11 @@ fn main() {
     // Section 2: memory.
     let total = sys.total_memory();
     let used = sys.used_memory();
-    let mem_load = if total > 0 { (used as f64 / total as f64 * 100.0) as u64 } else { 0 };
+    let mem_load = if total > 0 {
+        (used as f64 / total as f64 * 100.0) as u64
+    } else {
+        0
+    };
     println!("Memory total (GB) : {:.2}", total as f64 / GB);
     println!("Memory free (GB)  : {:.2}", (total - used) as f64 / GB);
     println!("Memory in use (%) : {}", mem_load);
@@ -76,8 +80,8 @@ fn main() {
         let dtotal = disk.total_space();
         let dfree = disk.available_space();
         let mut used_pct = 0.0;
-        if dtotal > 0 { 
-            used_pct = 100.0 * (dtotal - dfree) as f64 / dtotal as f64; 
+        if dtotal > 0 {
+            used_pct = 100.0 * (dtotal - dfree) as f64 / dtotal as f64;
         }
         println!("Disk total (GB) : {:.2}", dtotal as f64 / GB);
         println!("Disk free (GB)  : {:.2}", dfree as f64 / GB);
@@ -91,10 +95,6 @@ fn main() {
         disk_used_pct,
     };
     let score = compute_score(&findings);
-    println!(
-        "Efficiency score   : {} / 100 ({})",
-        score,
-        rating(score)
-    );
+    println!("Efficiency score   : {} / 100 ({})", score, rating(score));
     println!("Done.");
 }
